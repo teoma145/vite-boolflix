@@ -23,11 +23,12 @@ export default {
         }
     },
     methods:{
-      queryadd(){
+        queryadd(){
         if (this.textsearch.trim() !== ''){
-        this.store.query=this.textsearch;
+        this.store.params.query=this.textsearch;
         console.log(this.store.query)
         this.$emit('search',)
+        
         }
       },
       

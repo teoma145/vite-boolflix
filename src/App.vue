@@ -28,11 +28,12 @@ export default {
     },
     methods:{
         
-         GetMoviesAndSeries(){
+          GetMoviesAndSeries(){
            const movieurl= this.store.apiUrl + this.store.endPoint.movies;
-           axios.get(movieurl,{params:this.store.params}).then((response)=>{
+            axios.get(movieurl,{params:this.store.params}).then((response)=>{
             console.log(response.data.results);
             this.store.movieList=response.data.results;
+            console.log(this.store.movieList)
            });
            const tvurl= this.store.apiUrl + this.store.endPoint.series;
            axios.get(tvurl,{params:this.store.params}).then((response)=>{
