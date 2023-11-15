@@ -27,3 +27,16 @@ npm run dev
 ```sh
 npm run build
 ```
+ GetMoviesAndSeries(){
+           const movieurl= this.store.apiUrl + this.store.endPoint.movies;
+           axios.get(movieurl,{params:this.store.params}).then((response)=>{
+            console.log(response.data.results);
+            this.store.movieList=response.data.results;
+           });
+           const tvurl= this.store.apiUrl + this.store.endPoint.series;
+           axios.get(tvurl,{params:this.store.params}).then((response)=>{
+            console.log(response.data.results);
+            this.store.seriesList=response.data.results;
+           })
+        
+        }

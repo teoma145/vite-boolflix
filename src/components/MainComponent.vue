@@ -1,18 +1,26 @@
 <template>
     <div class="maincolor">
       <div class="container">
-         <div class="row">
+         <div class="row mb-4">
             <h1>Film</h1>
-            <div class="col-12 col-md-3" v-for="(movie,index) in store.movieList" :key=movie.id>
-                {{ movie.title }}
+            <div class="col-12 col-md-3 mb-4" v-for="(movie,index) in store.movieList" :key=movie.id>
+                
                 <img :src="'https://image.tmdb.org/t/p/w342' +movie.backdrop_path" alt="">
+                {{ movie.title }}<br>
+                {{ movie.original_language }}<br>
+                titolo originale:{{ movie.original_title }}<br>
+                Voto:{{ movie.vote_average }}
             </div>
          </div>
          <div class="row">
             <h1>Serie tv</h1>
-            <div class="col-6 col-md-3 mb-5 p-2" v-for="(serie,index) in store.seriesList" :key=serie.id>
-                {{ serie.name }}
+            <div class="col-12 col-md-3 mb-5 p-2" v-for="(serie,index) in store.seriesList" :key=serie.id>
+                
                 <img :src="'https://image.tmdb.org/t/p/w342' +serie.backdrop_path" alt="">
+                {{ serie.name }}<br>
+                lingua:{{ serie.original_language }}<br>
+                titolo originale:{{  serie.original_name }}<br>
+                Voto:{{ serie.vote_average }}
             </div>
          </div>
       </div>

@@ -1,6 +1,6 @@
 <template>
     <div>
-      <HeadComponent/>
+      <HeadComponent @search="GetMoviesAndSeries"/>
     </div>
     <div>
         <MainComponent/>
@@ -27,7 +27,8 @@ export default {
         }
     },
     methods:{
-        GetMoviesAndSeries(){
+        
+         GetMoviesAndSeries(){
            const movieurl= this.store.apiUrl + this.store.endPoint.movies;
            axios.get(movieurl,{params:this.store.params}).then((response)=>{
             console.log(response.data.results);
@@ -42,7 +43,7 @@ export default {
         }
     },
     created(){
-        this.GetMoviesAndSeries()
+        
     },
 }
 </script>
