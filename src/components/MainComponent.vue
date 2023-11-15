@@ -7,8 +7,8 @@
                 
                 <img :src="'https://image.tmdb.org/t/p/w342' +movie.backdrop_path" alt="">
                 {{ movie.title }}<br>
-                {{ movie.original_language }}<br>
-                <img :src="'images/' + movie.original_language + '.svg'" alt="" class="bandiere"><br>
+                <img :src="'images/' + movie.original_language + '.svg'" alt="bandiera non disponibile per questo film" class="bandiere"><br>
+                
                 titolo originale:{{ movie.original_title }}<br>
                 Voto:{{ movie.vote_average }}
             </div>
@@ -38,7 +38,11 @@ export default {
 
         return {
             store,
+            
         }
+    },
+    methods:{
+       
     }
 }
 </script>
