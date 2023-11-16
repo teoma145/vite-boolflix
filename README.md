@@ -27,16 +27,46 @@ npm run dev
 ```sh
 npm run build
 ```
- GetMoviesAndSeries(){
-           const movieurl= this.store.apiUrl + this.store.endPoint.movies;
-           axios.get(movieurl,{params:this.store.params}).then((response)=>{
-            console.log(response.data.results);
-            this.store.movieList=response.data.results;
-           });
-           const tvurl= this.store.apiUrl + this.store.endPoint.series;
-           axios.get(tvurl,{params:this.store.params}).then((response)=>{
-            console.log(response.data.results);
-            this.store.seriesList=response.data.results;
-           })
-        
+  html
+	<img :src="currentFlag" @error="toDefSrc()">
+ js
+	...
+	props: {
+        ...
+        original_language: String,
+    	}
+	...
+	data() {
+        return {
+            currentFlag: ''
+        },
+	...
+	methods:{
+	toDefSrc() {
+		// to replace with a no-found-flag flag
+           	this.currentFlag = 'https://flagsapi.com/' + 'GB' + '/flat/64.png';
+		}
         }
+	computed: {
+        getFlagUrl() {
+            let parsedString = this.original_language.toUpperCase().substring(0, 2)
+            if (parsedString === "EN") {
+                parsedString = "GB"
+            } // handling most common mistake
+            this.currentFlag = 'https://flagsapi.com/' + parsedString + '/flat/64.png';
+        },
+    }
+'images/' + movie.original_language + '.svg'
+
+
+
+
+
+
+
+
+
+
+
+
+
