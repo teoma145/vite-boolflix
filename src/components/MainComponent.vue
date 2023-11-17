@@ -9,12 +9,17 @@
                 <div class="box-front">
                 <img :src="'https://image.tmdb.org/t/p/w342' +movie.poster_path" alt="">
                 </div>
-                <div class="box-back">
+                <div class="box-back overflow-auto ">
                 {{ movie.title }}<br>
                 <img :src="GetFlagmovie(index)" alt="" class="bandiere"><br>
                 titolo originale:{{ movie.original_title }}<br>
                 <i v-for="(n,starindex) in 5" :key="starindex" class="fa-star" :class="(n <= getVotefilm(index)) ? 'fa-solid' : 'fa-regular'"></i>
-                Voto:{{ movie.vote_average }}
+                <p>Voto:{{ movie.vote_average }}</p>
+                <button @click="GetCreditmovie(index)">More Info</button>
+                <div class="fs-6 overflow-auto ">
+                  <p>{{ cast[index] }}</p>
+                </div>
+                
                </div>
              </div>
              </div>
@@ -34,6 +39,10 @@
                  <i v-for="(a,star2index) in 5" :key="star2index" class="fa-star" :class="(a <= getVoteseries(index)) ? 'fa-solid' : 'fa-regular'"></i>
                  titolo originale:{{  serie.original_name }}<br>
                  Voto:{{ serie.vote_average }}
+                 <button @click="GetCreditseries(index)">More Info</button>
+                <div class="fs-6 overflow-auto ">
+                  <p>{{ castseries[index] }}</p>
+                </div>
                 </div>
                </div> 
              </div>
@@ -45,6 +54,8 @@
 
 <script>
 import {store} from '../data.js';
+import axios from 'axios';
+
 export default {
     name:'MainComponent',
     data () {
@@ -62,7 +73,9 @@ export default {
                 'fr',
                 'ja',
                 'ca',
-            ]
+            ],
+            cast: [],
+            castseries:[]
         }
     },
     methods:{
@@ -82,11 +95,45 @@ export default {
       },
       getVotefilm(index){
         return Math.ceil(this.store.movieList[index].vote_average /2);
+        
        },
        getVoteseries(index){
         return Math.ceil(this.store.seriesList[index].vote_average /2);
+       },
+       GetCreditmovie(index){
+        const movieId = this.store.movieList[index].id;
+        
+        const endpoint = this.store.endPoint.movieCast + movieId + '/credits'
+        const params = {
+          api_key:this.store.params.api_key
+        };
+        
+        axios.get(this.store.apiUrl + endpoint,{params}).then((res)=>{
+        const cast = res.data.cast.slice(0, 5).map(actor => actor.name);
+        console.log(cast)
+        this.cast[index] = cast;
+        console.log(this.cast)
+        console.log(cast)
+        })
+       },
+       GetCreditseries(index){
+        const seriesId = this.store.seriesList[index].id;
+        
+        const endpoint = this.store.endPoint.seriesCast + seriesId + '/credits'
+        const params = {
+          api_key:this.store.params.api_key
+        };
+        
+        axios.get(this.store.apiUrl + endpoint,{params}).then((res)=>{
+        const cast = res.data.cast.slice(0, 5).map(actor => actor.name);
+        console.log(cast)
+        this.castseries[index] = cast;
+        console.log(this.cast)
+        console.log(cast)
+        })
        }
     },
+      
     computed:{
        
     }
@@ -127,7 +174,7 @@ export default {
         color: #111111;
       }
       .box-back {
-        background-color: #8ebf42;
+        background-color:black;
         color: #eeeeee;
         transform: rotateY(180deg);
       }
