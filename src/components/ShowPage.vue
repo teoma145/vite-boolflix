@@ -16,10 +16,11 @@
         <div class="box-front">
           <img :src="'https://image.tmdb.org/t/p/w342' +popularitem.poster_path" alt="">
         </div>
-        <div class="box-back">
+        <div class="box-back overflow-auto ">
           <h2>{{ popularitem.title }}</h2>
           
           <i v-for="(a,star3index) in 5" :key="star3index" class="fa-star" :class="(a <= getVotepopular(index)) ? 'fa-solid' : 'fa-regular'"></i>
+          <p>{{popularitem.overview}}</p>
         </div>
       </div>
     </div>

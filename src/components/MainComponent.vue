@@ -18,6 +18,7 @@
                 <button @click="GetCreditmovie(index)">More Info</button>
                 <div class="fs-6 overflow-auto ">
                   <p>{{ cast[index] }}</p>
+                  <p>{{movie.overview}}</p>
                 </div>
                 
                </div>
@@ -32,7 +33,7 @@
                 <div class="box-front">
                  <img :src="'https://image.tmdb.org/t/p/w342' +serie.poster_path" alt="">
                 </div>
-                <div class="box-back">
+                <div class="box-back overflow-auto">
                  {{ serie.name }}<br>
                  lingua:{{ serie.original_language }}<br>
                  <img :src="GetFlagseries(index)" alt="" class="bandiere"><br>
@@ -42,6 +43,7 @@
                  <button @click="GetCreditseries(index)">More Info</button>
                 <div class="fs-6 overflow-auto ">
                   <p>{{ castseries[index] }}</p>
+                  <p>{{serie.overview}}</p>
                 </div>
                 </div>
                </div> 
