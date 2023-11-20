@@ -9,8 +9,18 @@
         <source src="../assets/style/videos/trailer.mp4" type="video/mp4" />
         Il tuo browser non supporta il video.
       </video>
-      <div class="mt-5 ms-5">
-      <h1>I più popolari</h1>
+      <h1 class="mt-3 ms-4">I più popolari</h1>
+      <div class="mt-5 mymargin d-flex flex-wrap">
+       <div class="box ms-4 mb-5" v-for="(popularitem,index) in store.popularList " :key=index>
+       <div class="box-inner">
+        <div class="box-front">
+          <img :src="'https://image.tmdb.org/t/p/w342' +popularitem.poster_path" alt="">
+        </div>
+        <div class="box-back">
+          <h2>Back Side</h2>
+        </div>
+      </div>
+    </div>
     </div>
     </div>
     
@@ -19,6 +29,7 @@
 
 <script>
 import {store} from '../data';
+import axios from 'axios';
 export default {
     name:'ShowPage',
     data () {
@@ -27,7 +38,23 @@ export default {
         return {
             store,
         }
-    }
+    },
+    created() {
+    this.PopularFilm();
+    },
+    methods:{
+    PopularFilm(){
+      const params = {
+        api_key: 'c96cebdd3cf1aa616cc8c037f2623de0',};
+        axios.get(store.apiUrl+'movie/popular',{params}).then((response)=>{
+            
+            this.store.popularList=response.data.results;
+            console.log(this.store.popularList)
+            
+           });
+       },
+      }
+     
 }
 </script>
 
@@ -37,4 +64,44 @@ export default {
     margin: 0;
     width: 100%;
 }
+.mymargin{
+  margin-left:0 auto;
+}
+.box {
+        background-color: transparent;
+        width: 200px;
+        height: 300px;
+        border: 1px solid #eeeeee;
+        perspective: 1000px;
+      }
+      .box-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.5s;
+        transform-style: preserve-3d;
+      }
+      .box:hover .box-inner {
+        transform: rotateY(180deg);
+      }
+      .box-front,
+      .box-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+      }
+      .box-front {
+        background-color: #cccccc;
+        color: #111111;
+      }
+      .box-back {
+        background-color: #8ebf42;
+        color: #eeeeee;
+        transform: rotateY(180deg);
+      }
+      img{
+        width: 100%;
+      }
 </style>
