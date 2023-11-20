@@ -17,7 +17,9 @@
           <img :src="'https://image.tmdb.org/t/p/w342' +popularitem.poster_path" alt="">
         </div>
         <div class="box-back">
-          <h2>Back Side</h2>
+          <h2>{{ popularitem.title }}</h2>
+          
+          <i v-for="(a,star3index) in 5" :key="star3index" class="fa-star" :class="(a <= getVotepopular(index)) ? 'fa-solid' : 'fa-regular'"></i>
         </div>
       </div>
     </div>
@@ -43,6 +45,9 @@ export default {
     this.PopularFilm();
     },
     methods:{
+      getVotepopular(index){
+        return Math.ceil(this.store.popularList[index].vote_average /2);
+      },
     PopularFilm(){
       const params = {
         api_key: 'c96cebdd3cf1aa616cc8c037f2623de0',};
@@ -53,6 +58,7 @@ export default {
             
            });
        },
+       
       }
      
 }
@@ -97,7 +103,7 @@ export default {
         color: #111111;
       }
       .box-back {
-        background-color: #8ebf42;
+        background-color:red;
         color: #eeeeee;
         transform: rotateY(180deg);
       }
