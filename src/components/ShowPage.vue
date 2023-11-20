@@ -5,7 +5,7 @@
       <div class="bg-danger" v-if="store.movieList <= 0 && store.mysearched == true">
       La tua ricerca non ha prodotto risultati
      </div>
-      <video controls width="1400" class="myvideo">
+      <video autoplay controls width="1400" class="myvideo">
         <source src="../assets/style/videos/trailer.mp4" type="video/mp4" />
         Il tuo browser non supporta il video.
       </video>

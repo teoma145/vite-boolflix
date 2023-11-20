@@ -1,6 +1,7 @@
 <template>
     <div>
-      <InitPage :class="{ 'd-none': Websiteshow }" @go-website="VaiSito"/>
+      <InitPage :class="{ 'd-none': Initpagetoggle }" @go-website="VaiSito"/>
+      <Netflixanimation :class="{ 'd-none': !Initpagetoggle || Websiteshow }"/>
       <HeadComponent :class="{ 'd-none': !Websiteshow }" @search="GetMoviesAndSeries"/>
     </div>
     <div>
@@ -16,6 +17,7 @@ import HeadComponent from './components/HeadComponent.vue';
 import InitPage from './components/InitPage.vue'
 import MainComponent from './components/MainComponent.vue';
 import ShowPage from './components/ShowPage.vue'
+import Netflixanimation from './components/Netflixanimation.vue'
 import axios from 'axios';
 export default {
     name:'App',
@@ -24,6 +26,7 @@ export default {
      MainComponent,
      ShowPage,
      InitPage,
+     Netflixanimation,
     },
     data () {
         
@@ -31,11 +34,15 @@ export default {
         return {
             store,
             Websiteshow:false,
+            Initpagetoggle:false,
         }
     },
     methods:{
           VaiSito(){
-           this.Websiteshow=true
+        this.Initpagetoggle=true,
+            setTimeout(() => {
+           this.Websiteshow = true;
+            }, 16000);
           },
           GetMoviesAndSeries(){
            const movieurl= this.store.apiUrl + this.store.endPoint.movies;
