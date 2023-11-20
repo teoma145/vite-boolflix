@@ -1,6 +1,6 @@
 <template>
     <div class="maincolor">
-      <div class="container">
+      <div class="container-fluid" v-if="store.movieList.length > 0">
             
             <h1>Film</h1>
             <div class="d-flex flex-wrap">
@@ -38,7 +38,7 @@
                  <img :src="GetFlagseries(index)" alt="" class="bandiere"><br>
                  <i v-for="(a,star2index) in 5" :key="star2index" class="fa-star" :class="(a <= getVoteseries(index)) ? 'fa-solid' : 'fa-regular'"></i>
                  titolo originale:{{  serie.original_name }}<br>
-                 Voto:{{ serie.vote_average }}
+                 <p>Voto:{{ serie.vote_average }}</p>
                  <button @click="GetCreditseries(index)">More Info</button>
                 <div class="fs-6 overflow-auto ">
                   <p>{{ castseries[index] }}</p>
@@ -142,7 +142,7 @@ export default {
 
 <style lang="scss" scoped>
 .maincolor{
-    background-color: grey;
+    background-color:grey;
 }
 .box {
         background-color: transparent;

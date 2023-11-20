@@ -1,9 +1,9 @@
 <template>
-    <div class="d-flex justify-content-between text-bg-dark">
+    <div class="d-flex justify-content-between text-bg-dark flex-wrap">
         <div>
-            <h1 class="text-danger ">BOOFLIX</h1>
+            <img src="../assets/style/images/netflix.svg" alt="" @click="goHome()">
         </div>
-        <div class="mt-2 me-2">
+        <div class="mt-4 me-2">
             <input type="text" id="nome" name="nome" v-model="textsearch">
             <button @click="queryadd">invia</button>
         </div>
@@ -20,6 +20,7 @@ export default {
         return {
             store,
             textsearch:'',
+
         }
     },
     methods:{
@@ -28,14 +29,22 @@ export default {
         this.store.params.query=this.textsearch;
         console.log(this.store.query)
         this.$emit('search',)
-        
+        setTimeout(() => {
+        this.store.mysearched = true;
+        }, 500);
         }
       },
-      
+      goHome(){
+        this.store.movieList='',
+        store.mysearched=false
+      }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-
+img{
+    width: 200px;
+    padding: 20px;
+}
 </style>

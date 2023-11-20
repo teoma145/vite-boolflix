@@ -3,6 +3,7 @@
       <HeadComponent @search="GetMoviesAndSeries"/>
     </div>
     <div>
+        <ShowPage/>
         <MainComponent/>
     </div>
 </template>
@@ -12,12 +13,14 @@
 import {store} from './data';
 import HeadComponent from './components/HeadComponent.vue';
 import MainComponent from './components/MainComponent.vue';
+import ShowPage from './components/ShowPage.vue'
 import axios from 'axios';
 export default {
     name:'App',
     components:{
      HeadComponent,
      MainComponent,
+     ShowPage,
     },
     data () {
         
